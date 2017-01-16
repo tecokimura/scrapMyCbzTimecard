@@ -54,6 +54,21 @@ function main($argc, $argv)
         // 起動オプションから設定を取り出す
         $aryOption = getPhpOption($argv);
 
+        // user,pass
+
+        // タイムカードを取得する
+        get();
+
+        // データを解析する
+        anlyze();
+
+        // 解析データから時間を計算する
+        calcTimes();
+
+        // htmlとして出力
+        outputHtml();
+
+
 
         // $log = getLog($logLevel);
 
@@ -62,14 +77,65 @@ function main($argc, $argv)
     }
 
 
-    // ヘルプの出力が必要な場合
-    if ( false ) {
-        dispHelpThis();
-    }
 
 }
 
 
+/**
+ * タイムカードデータを管理するクラス
+ *
+ * @category Class
+ * @package  None
+ * @author   tecokimura <tecokimura@gmail.com>
+ * @license  MIT License
+ * @link     https://github.com/tecokimura/scrapMyCbzTimecard
+ */
+class TimecardDay
+{
+    private $_strIn;    // 出社時間：string
+    private $_strOut;   // 退勤時間：string
+    private $_strGo;    // 外出開始時間：string
+    private $_strBack;  // 外出終了時間：string
+
+    private $_intIn;    // 出社時間：int
+    private $_intOut;   // 退勤時間：int
+    private $_intGo;    // 外出開始時間：int
+    private $_intBack;  // 外出終了時間：int
+
+    /**
+     * 文字列のタイム表記を調べる
+     *
+     * @param string $strTime 渡す文字列 HH:MM
+     * @param string $isEmpty 空文字の場合の戻り値
+     *
+     * @return bool "HH;MM"ならtrue
+     */
+    public static function checkStrTime($strTime, $isEmpty=true)
+    {
+        // [0-9]?[0-9]:[0-9]{2}
+    }
+
+
+    /**
+     * 出社時間文字列を設定する
+     *
+     * @param string $strTime 渡す文字列 HH:MM
+     *
+     * @return bool formatを調べて設定できればtrue、できなければfalse
+     */
+    public function setStrIn($strTime)
+    {
+        $isResult = false;
+
+        if (self::checkStrTime($strTime) ) {
+            $this->_strIn = $strTime;
+            $isResult = true;
+        }
+
+        return $isResult;
+    }
+
+}
 
 
 /**

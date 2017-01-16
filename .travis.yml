@@ -18,6 +18,6 @@ notifications:
   email: false
 
 script:
-  - php vendor/squizlabs/php_codesniffer/bin/phpcs rltam.php
+  - php vendor/squizlabs/php_codesniffer/bin/phpcs main.php
   - php vendor/phpunit/phpunit/phpunit tests/
 
